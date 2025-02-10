@@ -5,85 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D Photo Gallery</title>
     <style>
-        body { margin: 0; }
+        body { margin: 0; overflow: hidden; }
         canvas { display: block; }
     </style>
 </head>
 <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script>
-			// 创建场景
-			const scene = new THREE.Scene();
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+    // 创建场景
+    const scene = new THREE.Scene();
 
-			// 创建相机
-			const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-			camera.position.z = 5;
+    // 设置背景图片
+    const textureLoader = new THREE.TextureLoader();
+    const bgTexture = textureLoader.load('bg.jpg');
+    scene.background = bgTexture;
 
-			// 创建渲染器
-			const renderer = new THREE.WebGLRenderer();
-			renderer.setSize(window.innerWidth, window.innerHeight);
-			document.body.appendChild(renderer.domElement);
+    // 创建相机
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5;
 
-			// 添加照片
-			const textureLoader = new THREE.TextureLoader();
-			const images = [
-				'1.jpg',
-				'2.jpg',
-				'3.jpg',
-				'4.jpg',
-				'5.jpg',
-				'6.jpg',
-				'7.jpg',
-				'8.jpg',
-				'9.jpg',
-				'10.jpg',
-				'11.jpg',
-				'12.jpg',
-				'13.jpg',
-				'14.jpg',
-				'15.jpg',
-				'16.jpg',
-                '17.jpg',
-				'18.jpg',
-				'19.jpg',
-				'20.jpg'
-			];
+    // 创建渲染器
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
 
-			images.forEach((imagePath, index) => {
-				const geometry = new THREE.PlaneGeometry(1, 1);
-				const texture = textureLoader.load(imagePath);
-				const material = new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide });
-				const mesh = new THREE.Mesh(geometry, material);
+    // 添加照片
+    const images = [
+        '0.png',
+        '1.jpg',
+        '2.jpg',
+        '3.jpg',
+        '4.jpg',
+        '5.jpg',
+        '6.jpg',
+        '7.jpg',
+        '8.jpg',
+        '9.jpg',
+        '10.jpg',
+        '11.jpg',
+        '12.jpg',
+        '13.jpg',
+        '14.jpg',
+        '15.jpg',
+        '16.jpg',
+        '17.jpg',
+        '18.jpg',
+        '19.jpg',
+        '20.jpg'
+    ];
 
-				// 布局图片
-				const theta = index * 0.32 + Math.PI / 4;
-				mesh.position.x = 4 * Math.sin(theta);
-				mesh.position.y = 2 * Math.random() - 1;
-				mesh.position.z = 4 * Math.cos(theta);
-				mesh.rotation.y = theta;
+    images.forEach((imagePath, index) => {
+        const geometry = new THREE.PlaneGeometry(1, 1);
+        const texture = textureLoader.load(imagePath);
+        const material = new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide });
+        const mesh = new THREE.Mesh(geometry, material);
 
-				scene.add(mesh);
-			});
+        // 布局图片
+        const theta = index * 0.32 + Math.PI / 4;
+        mesh.position.x = 4 * Math.sin(theta);
+        mesh.position.y = 2 * Math.random() - 1;
+        mesh.position.z = 4 * Math.cos(theta);
+        mesh.rotation.y = theta;
 
-			// 渲染循环
-			function animate() {
-				requestAnimationFrame(animate);
+        scene.add(mesh);
+    });
 
-				// 旋转场景
-				scene.rotation.y += 0.005;
+    // 渲染循环
+    function animate() {
+        requestAnimationFrame(animate);
 
-				renderer.render(scene, camera);
-			}
+        // 旋转场景
+        scene.rotation.y += 0.005;
 
-			animate();
+        renderer.render(scene, camera);
+    }
 
-			// 调整窗口大小时调整渲染器
-			window.addEventListener('resize', () => {
-				camera.aspect = window.innerWidth / window.innerHeight;
-				camera.updateProjectionMatrix();
-				renderer.setSize(window.innerWidth, window.innerHeight);
-			});
+    animate();
 
-    </script>
+    // 调整窗口大小时调整渲染器
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+</script>
 </body>
 </html>
