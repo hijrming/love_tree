@@ -9,7 +9,9 @@ var config = {
         "都让我觉得无比幸福",
         "希望新的一年里，我们能继续一起创造更多美好的回忆",
         "我爱你，比昨天多一点，比明天少一点",
-        "但永远都是刚刚好"
+        "但永远都是刚刚好","<div style=\"text-align:center;clear:both;margin-top:20px;\">\n" +
+                "    <a href=\"https://github.com/ajlovechina/loveBalloon\" target=\"_blank\" style=\"color: #666666\">点我吧~</a>\n" +
+                "</div>"
         ],
 date:"2023-07-09T18:00:00",
 
